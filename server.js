@@ -2,17 +2,20 @@ import express from "express"
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { postRouter } from "./routes/postRoute.js";
-import ConnectionDb from "./mongodb/connect.js";
 import cron from "node-cron";
 import axios from "axios";
+import { createToken } from "./lib/createToken.js";
 
 dotenv.config();
 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-let token = "1000.f772565df8fda7df90979735c904011d.8bb8c6fc6d513ec1c6862ee24f04c372"
+let token = ""
 
+if(token == ""){
+    token = createToken();
+}
 // middlewares
 app.use(cors());
 app.use(express.json());
@@ -32,7 +35,6 @@ app.use("/api/post",postRouter);
 
 
 try{
-    await ConnectionDb(process.env.MONGO_DB_URI);
     app.listen(PORT, ()=>{
         console.log(`connected to ${PORT}`);
     })
