@@ -51,9 +51,9 @@ const PostLeadVerification = async (req, res) => {
 
     
     const payload = { data: [dataMap] , trigger : ["Workflow"]};
-
+    console.log(payload);
     const headers = {
-      "Authorization": `Zoho-oauthtoken ${token}`,
+      "Authorization": `Zoho-oauthtoken 1000.597c315ad097dd27acbfe63ce1d82e48.ea1a81165b7f1bfc56c618619a3039bd`,
       "Content-Type": "application/json"
     };
 
@@ -62,7 +62,7 @@ const PostLeadVerification = async (req, res) => {
       payload,
       { headers }
     );
-
+    console.log(response.data);
     console.log("✅ Record created successfully:", JSON.stringify(response.data));
     res.status(201).json({ message: "mubarak hoooo" });
 
@@ -73,6 +73,7 @@ const PostLeadVerification = async (req, res) => {
     } else {
       console.error("❌ Request Error:", error);
     }
+    console.log(error);
     res.status(400).json({ error: "Zoho request failed" });
   }
 };
