@@ -62,7 +62,7 @@ const PostLeadVerification = async (req, res) => {
       payload,
       { headers }
     );
-    console.log(response.data);
+    // console.log(response.data);
     console.log("✅ Record created successfully:", JSON.stringify(response.data));
     res.status(201).json({ message: "mubarak hoooo" });
 
@@ -73,7 +73,7 @@ const PostLeadVerification = async (req, res) => {
     } else {
       console.error("❌ Request Error:", error);
     }
-    console.log(error);
+    // console.log(error);
     res.status(400).json({ error: "Zoho request failed" });
   }
 };
