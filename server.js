@@ -37,10 +37,10 @@ app.use(express.json());
 app.use("/api/post", postRouter);
 app.get("/api/token", async (req, res) => {
   try {
-    const res = await axios.post(
+    const response = await axios.post(
       `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.ZOHO_REFRESH_TOKEN}&client_id=${process.env.ZOHO_CLIENT_ID}&client_secret=${process.env.ZOHO_CLIENT_SECRET}&redirect_uri=${process.env.ZOHO_REDIRECT_URI}&grant_type=refresh_token`
     );
-    token = res.data.access_token;
+    token = response.data.access_token;
     res.status(200).json({message:"token created",token});
   } catch (error) {
     console.log(error);
