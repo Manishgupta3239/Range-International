@@ -4,13 +4,14 @@ import token from "../server.js";
 const PostLeadVerification = async (req, res) => {
   try {
     const data = req.body;
-  
-    console.log("data from zoho",data)
+
+    console.log("data from zoho", data);
 
     // Get current date and subtract 12 hours 30 minutes
     const now = new Date();
-    now.setHours(now.getHours() - 12);
-    now.setMinutes(now.getMinutes() - 30);
+
+    // current time (no subtraction of 12 hours or 30 minutes)
+    const currentDate = new Date();
 
     // Format to Zoho datetime: YYYY-MM-DDTHH:mm:ss+hh:mm
     const formatZohoDatetime = (date) => {
@@ -19,12 +20,11 @@ const PostLeadVerification = async (req, res) => {
       const year = date.getFullYear();
       const month = pad(date.getMonth() + 1);
       const day = pad(date.getDate());
-      const hours = pad(date.getHours());
+      const hours = pad(date.getHours()); // 24-hour format
       const minutes = pad(date.getMinutes());
       const seconds = pad(date.getSeconds());
 
-      // Timezone offset in minutes
-      const tzOffset = -date.getTimezoneOffset();
+      const tzOffset = -date.getTimezoneOffset(); // in minutes
       const sign = tzOffset >= 0 ? "+" : "-";
       const tzHours = pad(Math.floor(Math.abs(tzOffset) / 60));
       const tzMinutes = pad(Math.abs(tzOffset) % 60);
@@ -32,9 +32,15 @@ const PostLeadVerification = async (req, res) => {
       return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}${tzHours}:${tzMinutes}`;
     };
 
-    const Assign_Time1 = formatZohoDatetime(now);
-    const validTillDate = new Date(now.getTime() + 1 * 60 * 1000); // add 1 min (60,000 ms)
+    // Assign_Time in 24-hour format
+    const Assign_Time1 = formatZohoDatetime(currentDate);
+
+    // Valid_Till = Assign_Time + 1 minute
+    const validTillDate = new Date(currentDate.getTime() + 1 * 60 * 1000); // add 1 min
     const valid_till = formatZohoDatetime(validTillDate);
+
+    console.log("Assign_Time1:", Assign_Time1); // e.g., 2025-10-22T14:45:30+05:30
+    console.log("Valid_Till:", valid_till); // e.g., 2025-10-22T14:46:30+05:30
 
     console.log(" Zoho datetime:", Assign_Time1);
 
@@ -50,17 +56,16 @@ const PostLeadVerification = async (req, res) => {
       Valid_Till: valid_till, // <- Zoho datetime format
       Lead_Name: `${data.data.Lead_Name}`,
       Email: `${data.data.Email}`,
-      Agent_Phone_No:`${data.data.Agent_Phone_No}`,
-      Agent_Name:`${data.data.Agent_Name}`,
-      Status: `${data.data.Status}`
+      Agent_Phone_No: `${data.data.Agent_Phone_No}`,
+      Agent_Name: `${data.data.Agent_Name}`,
+      Status: `${data.data.Status}`,
     };
 
-    
-    const payload = { data: [dataMap] , trigger : ["workflow"]};
-    console.log("payload",payload);
+    const payload = { data: [dataMap], trigger: ["workflow"] };
+    console.log("payload", payload);
     const headers = {
-      "Authorization": `Zoho-oauthtoken ${token}`,
-      "Content-Type": "application/json"
+      Authorization: `Zoho-oauthtoken ${token}`,
+      "Content-Type": "application/json",
     };
 
     const response = await axios.post(
@@ -69,13 +74,18 @@ const PostLeadVerification = async (req, res) => {
       { headers }
     );
     // console.log(response.data);
-    console.log("✅ Record created successfully:", JSON.stringify(response.data));
+    console.log(
+      "✅ Record created successfully:",
+      JSON.stringify(response.data)
+    );
     res.status(201).json({ message: "mubarak hoooo" });
-
   } catch (error) {
     if (error.response) {
       console.error("❌ Zoho Error Status:", error.response.status);
-      console.error("❌ Zoho Error Data:", JSON.stringify(error.response.data, null, 2));
+      console.error(
+        "❌ Zoho Error Data:",
+        JSON.stringify(error.response.data, null, 2)
+      );
     } else {
       console.error("❌ Request Error:", error);
     }
