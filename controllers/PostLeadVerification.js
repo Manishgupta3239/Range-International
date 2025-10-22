@@ -53,7 +53,7 @@ const PostLeadVerification = async (req, res) => {
     const payload = { data: [dataMap] , trigger : ["workflow"]};
     console.log("payload",payload);
     const headers = {
-      "Authorization": `Zoho-oauthtoken 1000.6c623f98cb1ecb93dcb867101ba6d9f2.894053b8c0fc2a00b965339118cb065d`,
+      "Authorization": `Zoho-oauthtoken ${token}`,
       "Content-Type": "application/json"
     };
 
