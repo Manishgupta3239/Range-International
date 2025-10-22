@@ -5,7 +5,7 @@ const PostLeadVerification = async (req, res) => {
   try {
     const data = req.body;
   
-    console.log(data)
+    console.log("zoho",data)
 
     // Get current date and subtract 12 hours 30 minutes
     const now = new Date();
@@ -41,17 +41,17 @@ const PostLeadVerification = async (req, res) => {
       Assign_Time: `${data.data.Assign_Time}`,
       Dev_Id: data.data.Dev_Id,
       Owner: `${data.data.Lead_Verification_Owner}`,
-      Name: `${data.data.Lead_Name}`,
+      Name: `${data.data.Lead_Verification_Name}`,
       Sub_Campaign_ID: `${data.data.Sub_Campaign_Name}`,
       Campaign_Name: `${data.data.Campaign_id}`,
       Valid_Till: data.data.Valid_Till, // <- Zoho datetime format
-      Lead_Name: `${data.data.Lead_Verification_Name}`,
+      Lead_Name: `${data.data.Lead_Name}`,
       Status: ""
     };
 
     
     const payload = { data: [dataMap] , trigger : ["Workflow"]};
-    console.log(payload);
+    console.log("payload",payload);
     const headers = {
       "Authorization": `Zoho-oauthtoken 1000.d10b7f9afb0168492062f7d432239767.772f1b8530a9798a8b4b5cb5123cdf86`,
       "Content-Type": "application/json"
