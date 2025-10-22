@@ -3,7 +3,7 @@ import axios from "axios";
 const PostLeadVerification = async (req, res) => {
   try {
     const data = req.body;
-
+    console.log(data);
     // Get current date and subtract 12 hours 30 minutes
     const now = new Date();
     now.setHours(now.getHours() - 12);
@@ -30,7 +30,7 @@ const PostLeadVerification = async (req, res) => {
     };
 
     const Assign_Time1 = formatZohoDatetime(now);
-    console.log("🕒 Zoho datetime:", Assign_Time1);
+    console.log(" Zoho datetime:", Assign_Time1);
 
     const dataMap = {
       Dev_Id_Rem: 2,
@@ -46,13 +46,6 @@ const PostLeadVerification = async (req, res) => {
       Email: "manish@gmail.com",
       Status: ""
     };
-
-
-// Build the payload
-// const payload = {
-//   data: dataList,
-//   trigger: workflowList
-// };
 
 
     const payload = { data: [dataMap] };
