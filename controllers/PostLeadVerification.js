@@ -5,7 +5,7 @@ const PostLeadVerification = async (req, res) => {
   try {
     const data = req.body;
   
-    console.log("zoho",data)
+    console.log("zoho",data.data.Lead_Verification_Name)
 
     // Get current date and subtract 12 hours 30 minutes
     const now = new Date();
@@ -37,7 +37,7 @@ const PostLeadVerification = async (req, res) => {
 
     const dataMap = {
       Dev_Id_Rem: 2,
-      Sub_Campaign_Name: `${data.data.Campaign_id}`,
+      Sub_Campaign_Name: `${data.data.Sub_Campaign_Name}`,
       Assign_Time: `${data.data.Assign_Time}`,
       Dev_Id: data.data.Dev_Id,
       Owner: `${data.data.Lead_Verification_Owner}`,
