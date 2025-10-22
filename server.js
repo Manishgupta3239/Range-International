@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-let token = "";
+let token = "1000.1e5a986a129d5989d7c8c9b518272c9f.2185815128d3164d0e5e7c2488b8f372";
 
 // if(token == ""){
 //     token = createToken();
