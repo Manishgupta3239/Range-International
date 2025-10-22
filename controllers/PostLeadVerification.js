@@ -31,7 +31,7 @@ const PostLeadVerification = async (req, res) => {
 
     const Assign_Time1 = formatZohoDatetime(now);
     console.log("🕒 Zoho datetime:", Assign_Time1);
-b
+
     const dataMap = {
       Dev_Id_Rem: 2,
       Sub_Campaign_Name: "6862703000002319408",
@@ -58,7 +58,7 @@ b
     const payload = { data: [dataMap] };
 
     const headers = {
-      "Authorization": "Zoho-oauthtoken 1000.8fa286fd59eb5f7db847a53dd4354ae7.e13b91f563f4810803a1d75d2ae8cbf3",
+      "Authorization": "Zoho-oauthtoken 1000.136a3d614d00b8da1086c6f900969aff.8870984f71932a621b664b642bb77f49",
       "Content-Type": "application/json"
     };
 
@@ -73,10 +73,10 @@ b
 
   } catch (error) {
     if (error.response) {
-      console.error(" Zoho Error Status:", error.response.status);
-      console.error(" Zoho Error Data:", JSON.stringify(error.response.data, null, 2));
+      console.error("❌ Zoho Error Status:", error.response.status);
+      console.error("❌ Zoho Error Data:", JSON.stringify(error.response.data, null, 2));
     } else {
-      console.error(" Request Error:", error.message);
+      console.error("❌ Request Error:", error);
     }
     res.status(400).json({ error: "Zoho request failed" });
   }
