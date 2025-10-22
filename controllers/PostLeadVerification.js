@@ -3,7 +3,8 @@ import axios from "axios";
 const PostLeadVerification = async (req, res) => {
   try {
     const data = req.body;
-    console.log(data);
+  
+
     // Get current date and subtract 12 hours 30 minutes
     const now = new Date();
     now.setHours(now.getHours() - 12);
@@ -34,16 +35,15 @@ const PostLeadVerification = async (req, res) => {
 
     const dataMap = {
       Dev_Id_Rem: 2,
-      Sub_Campaign_Name: "6862703000002319408",
-      Assign_Time: Assign_Time1,
-      Dev_Id: 0,
-      Owner: "6862703000001479150",
-      Name: "Lead_Verification_Name1",
-      Sub_Campaign_ID: "12121212",
-      Campaign_Name: "6862703000002319393",
-      Valid_Till: Assign_Time1, // <- Zoho datetime format
-      Lead_Name: "6862703000007270332",
-      Email: "manish@gmail.com",
+      Sub_Campaign_Name: `${data.data.Campaign_id}`,
+      Assign_Time: `${data.data.Assign_Time}`,
+      Dev_Id: data.data.Dev_Id,
+      Owner: `${data.data.Lead_Verification_Owner}`,
+      Name: `${data.data.Lead_Name}`,
+      Sub_Campaign_ID: `${data.data.Sub_Campaign_Name}`,
+      Campaign_Name: `${data.data.Campaign_id}`,
+      Valid_Till: data.data.Valid_Till, // <- Zoho datetime format
+      Lead_Name: `${data.data.Lead_Verification_Name}`,
       Status: ""
     };
 
