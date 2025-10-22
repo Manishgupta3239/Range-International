@@ -1,4 +1,5 @@
 import axios from "axios";
+import token from "../server.js";
 
 const PostLeadVerification = async (req, res) => {
   try {
@@ -47,11 +48,11 @@ const PostLeadVerification = async (req, res) => {
       Status: ""
     };
 
-
-    const payload = { data: [dataMap] };
+    
+    const payload = { data: [dataMap] , trigger : [workflow]};
 
     const headers = {
-      "Authorization": "Zoho-oauthtoken 1000.9baab5171b8fe55108a4d7206ecf36d0.3bc7d7132cc6351a9c075ffe9a650839",
+      "Authorization": `Zoho-oauthtoken ${token}`,
       "Content-Type": "application/json"
     };
 
