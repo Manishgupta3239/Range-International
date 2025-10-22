@@ -5,6 +5,7 @@ const PostLeadVerification = async (req, res) => {
   try {
     const data = req.body;
   
+    console.log(data)
 
     // Get current date and subtract 12 hours 30 minutes
     const now = new Date();
@@ -49,7 +50,7 @@ const PostLeadVerification = async (req, res) => {
     };
 
     
-    const payload = { data: [dataMap] , trigger : [workflow]};
+    const payload = { data: [dataMap] , trigger : ["Workflow"]};
 
     const headers = {
       "Authorization": `Zoho-oauthtoken ${token}`,
