@@ -33,20 +33,26 @@ const PostLeadVerification = async (req, res) => {
     };
 
     const Assign_Time1 = formatZohoDatetime(now);
+    const validTillDate = new Date(now.getTime() + 1 * 60 * 1000); // add 1 min (60,000 ms)
+    const valid_till = formatZohoDatetime(validTillDate);
+
     console.log(" Zoho datetime:", Assign_Time1);
 
     const dataMap = {
       Dev_Id_Rem: 2,
       Sub_Campaign_Name: `${data.data.Sub_Campaign_Name}`,
-      Assign_Time: `${data.data.Assign_Time}`,
+      Assign_Time: `${Assign_Time1}`,
       Dev_Id: data.data.Dev_Id,
       Owner: `${data.data.Lead_Verification_Owner}`,
       Name: `${data.data.Lead_Verification_Name}`,
       Sub_Campaign_ID: `${data.data.Sub_Campaign_Name}`,
       Campaign_Name: `${data.data.Campaign_id}`,
-      Valid_Till: data.data.Valid_Till, // <- Zoho datetime format
+      Valid_Till: valid_till, // <- Zoho datetime format
       Lead_Name: `${data.data.Lead_Name}`,
-      Status: ""
+      Email: `${data.data.Email}`,
+      Agent_Phone_No:`${data.data.Agent_Phone_No}`,
+      Agent_Name:`${data.data.Agent_Name}`,
+      Status: `${data.data.Status}`
     };
 
     
