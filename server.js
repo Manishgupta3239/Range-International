@@ -51,20 +51,20 @@ app.use(express.json());
 // api
 app.use("/api/post", postRouter);
 app.get("/api/token", async (req, res) => {
-  // try {
-  //   const response = await axios.post(
-  //     `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.ZOHO_REFRESH_TOKEN}&client_id=${process.env.ZOHO_CLIENT_ID}&client_secret=${process.env.ZOHO_CLIENT_SECRET}&redirect_uri=${process.env.ZOHO_REDIRECT_URI}&grant_type=refresh_token`
-  //   );
-  //   token = response.data.access_token;
-  //   console.log("token genereated using cron org" , token);
-  //   res.status(200).json({message:"token created",token});
-  // } catch (error) {
-  //   console.log(error);
-  //   res.status(400).json({message:"token not created"});
-  // }
-  const newToken = await generateToken();
-  if (newToken) res.status(200).json({ message: "Token created", token: newToken });
-  else res.status(400).json({ message: "Token not created" });
+  try {
+    const response = await axios.post(
+      `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.ZOHO_REFRESH_TOKEN}&client_id=${process.env.ZOHO_CLIENT_ID}&client_secret=${process.env.ZOHO_CLIENT_SECRET}&redirect_uri=${process.env.ZOHO_REDIRECT_URI}&grant_type=refresh_token`
+    );
+    token = response.data.access_token;
+    console.log("token genereated using cron org" , token);
+    res.status(200).json({message:"token created",token});
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({message:"token not created"});
+  }
+  // const newToken = await generateToken();
+  // if (newToken) res.status(200).json({ message: "Token created", token: newToken });
+  // else res.status(400).json({ message: "Token not created" });
 });
 
 try {
