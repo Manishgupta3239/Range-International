@@ -11,32 +11,23 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-let token = "1000.dcbc49ce9a51bcbeb7c5b41f85c8660f.93a022587aef7f89a69539ce0358b610";
+let token = "";
 
-// if(token == ""){
-//     token = createToken();
-// }
+if(token == ""){
+    try {
+      const res = await axios.post(
+        "https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.89df4173347843c9188e4761ebea3d23.73fc2e4cf5f43ab24d22faf014328d60&client_secret=7f606f4851e64d48437dd2a965c974e79932df8eb4&client_id=1000.Y7C03TSOIAH5MGGO422CYCMKM71VTL&redirect_uri=https://crm.zoho.in/&grant_type=refresh_token"
+      );
+      token = res.data.access_token;
+      console.log("New token:", token);
+    } catch (error) {
+      console.error("Error fetching Zoho token:", error.message);
+    }
+
+}
 // middlewares
 app.use(cors());
 app.use(express.json());
-
-// setTimeout(() => {
-//   setInterval(async () => {
-//     try {
-//       const res = await axios.post(
-//         "https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.89df4173347843c9188e4761ebea3d23.73fc2e4cf5f43ab24d22faf014328d60&client_secret=7f606f4851e64d48437dd2a965c974e79932df8eb4&client_id=1000.Y7C03TSOIAH5MGGO422CYCMKM71VTL&redirect_uri=https://crm.zoho.in/&grant_type=refresh_token"
-//       );
-//       token = res.data.access_token;
-//       console.log("New token:", token);
-//     } catch (error) {
-//       console.error("Error fetching Zoho token:", error.message);
-//     }
-
-//     console.log("Running task every 10 minutes:", new Date());
-//   }, 60 * 1000); // 10 minutes in milliseconds
-// }, 10000); // start after 10 seconds
-
-
 
 // api
 app.use("/api/post", postRouter);

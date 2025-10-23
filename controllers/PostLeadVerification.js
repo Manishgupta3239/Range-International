@@ -51,7 +51,7 @@ const PostLeadVerification = async (req, res) => {
       Dev_Id: data.data.Dev_Id,
       Owner: `${data.data.Lead_Verification_Owner}`,
       Name: `${data.data.Lead_Verification_Name}`,
-      Sub_Campaign_ID: `${data.data.Sub_Campaign_Name}`,
+      Sub_Campaign_ID: `${data.data.Sub_Campaign_ID}`,
       Campaign_Name: `${data.data.Campaign_id}`,
       Valid_Till: valid_till, // <- Zoho datetime format
       Lead_Name: `${data.data.Lead_Name}`,
