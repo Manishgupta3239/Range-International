@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-let token = "1000.230cc91bf004d1f9f8c774e04baa7567.d4ae5530125434760018cad5677a44e1";
+let token = "";
 
 const generateToken = async () => {
   try {
@@ -29,7 +29,9 @@ const generateToken = async () => {
   await generateToken();
 })();
 
-
+function abc(){
+  return token;
+}
 
 // if(token == ""){
 //     try {
@@ -74,4 +76,4 @@ try {
 } catch (error) {
   console.log("ERROR IN connecting", error.message);
 }
-export default token;
+export default abc;

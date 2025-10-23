@@ -1,10 +1,10 @@
 import axios from "axios";
-import token from "../server.js";
+// import token from "../server.js";
 
 const PostLeadVerification = async (req, res) => {
   try {
     const data = req.body;
-
+    const token = abc();
     console.log("data from zoho", data);
 
     // Get current date and subtract 12 hours 30 minutes
