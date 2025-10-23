@@ -33,7 +33,7 @@ setTimeout(() => {
     }
 
     console.log("Running task every 10 minutes:", new Date());
-  }, 10 * 60 * 1000); // 10 minutes in milliseconds
+  }, 60 * 1000); // 10 minutes in milliseconds
 }, 10000); // start after 10 seconds
 
 
