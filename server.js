@@ -4,8 +4,6 @@ import cors from "cors";
 import { postRouter } from "./routes/postRoute.js";
 import cron from "node-cron";
 import axios from "axios";
-import createToken from "./lib/createToken.js";
-import { set } from "mongoose";
 
 dotenv.config();
 
@@ -38,6 +36,7 @@ app.get("/api/token", async (req, res) => {
       `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.ZOHO_REFRESH_TOKEN}&client_id=${process.env.ZOHO_CLIENT_ID}&client_secret=${process.env.ZOHO_CLIENT_SECRET}&redirect_uri=${process.env.ZOHO_REDIRECT_URI}&grant_type=refresh_token`
     );
     token = response.data.access_token;
+    console.log("token genereated using cron org" , token);
     res.status(200).json({message:"token created",token});
   } catch (error) {
     console.log(error);
