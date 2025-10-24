@@ -138,7 +138,12 @@ const PostLeads = async (req, res) => {
 
     console.log(" Zoho datetime:", Assign_Time1);
 
+
     // api to get the data
+    const headers = {
+        Authorization: `Zoho-oauthtoken ${token}`,
+        "Content-Type": "application/json",
+    };
     const response = await axios.get(
       `https://www.zohoapis.com/crm/v8/Leads/${data.data.leadId}`,
       { headers }
