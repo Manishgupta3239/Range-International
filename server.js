@@ -16,7 +16,7 @@ app.use(express.json());
 
 // generate and set token immediately
 (async () => {
-  const token = await generateToken();
+  const token =  await generateToken();
   setToken(token);
   console.log("Initial Zoho token generated");
 })();
