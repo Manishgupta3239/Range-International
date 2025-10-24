@@ -160,7 +160,7 @@ const PostLeads = async (req, res) => {
     // code to send the data back
     const lead = response.data.data[0]; // shortcut for cleaner code
     const dataMap = {
-      owner: `${data.data.owner}`,
+      Owner: data.data.owner,
       Team_Leader: `${data.data.Team_Leader}`,
       Agent_Phone_No: `${data.data.Agent_Phone_No}`,
       Agent_Name: `${data.data.Agent_Name}`,
