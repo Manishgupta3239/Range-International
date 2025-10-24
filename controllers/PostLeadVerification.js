@@ -145,6 +145,7 @@ const PostLeads = async (req, res) => {
       Authorization: `Zoho-oauthtoken ${token}`,
       "Content-Type": "application/json",
     };
+    console.log(headers);
     const response = await axios.get(
       `https://www.zohoapis.com/crm/v8/Leads/${data.data.lead_id}`,
       { headers }
@@ -154,16 +155,15 @@ const PostLeads = async (req, res) => {
       "✅ Record fetched  successfully:",
       // response.data,
     );
-    console.log("data=>",response.data.data[0]);
-    
+    // console.log("data=>", response.data.data[0]);
+
     // code to send the data back
     const lead = response.data.data[0]; // shortcut for cleaner code
-    // console.log("mobileeeeeeeeeeeeeee",response.data[0].Mobile)
     const dataMap = {
       owner: `${data.data.owner}`,
-      Team_Leader:`${data.data.Team_Leader}`,
-      Agent_Phone_No:`${data.data.Agent_Phone_No}`,
-      Agent_Name:`${data.data.Agent_Name}`,
+      Team_Leader: `${data.data.Team_Leader}`,
+      Agent_Phone_No: `${data.data.Agent_Phone_No}`,
+      Agent_Name: `${data.data.Agent_Name}`,
       // Mobile: `${lead.Mobile}`,
       Alternate_Mobile_Number: `${lead.Alternate_Mobile_Number}`,
       Full_Name1: `${lead.Full_Name1}`,
@@ -210,7 +210,7 @@ const PostLeads = async (req, res) => {
       Assign_Time: Assign_Time1,
       Original_Created_Time: `${lead.Original_Created_Time}`,
     };
-    
+
     const payload = { data: [dataMap], trigger: ["workflow"] };
     console.log("payload", payload);
     console.log("token in post lead =>", token);
@@ -218,20 +218,20 @@ const PostLeads = async (req, res) => {
       Authorization: `Zoho-oauthtoken ${token}`,
       "Content-Type": "application/json",
     };
-    
+
     const response1 = await axios.post(
       "https://www.zohoapis.com/crm/v8/Leads",
       payload,
-      { headers1}
+      { headers1 }
     );
     // console.log(response.data);
     console.log(
       "✅ Record created successfully:",
       JSON.stringify(response1.data)
     );
-    
+
     res.status(201).json({ message: "record created successfully" });
-    
+
   } catch (error) {
     if (error.response) {
       console.error("❌ Zoho Error Status:", error.response.status);
