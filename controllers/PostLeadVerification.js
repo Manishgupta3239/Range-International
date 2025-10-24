@@ -98,7 +98,7 @@ const PostLeadVerification = async (req, res) => {
 const PostLeads = async (req, res) => {
   try {
     const data = req.body;
-    // const token = updatedToken();
+    const token = getToken();
     console.log("lead ID from zoho", data);
 
     // Get current date and subtract 12 hours 30 minutes
