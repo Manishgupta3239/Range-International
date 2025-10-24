@@ -154,7 +154,7 @@ const PostLeads = async (req, res) => {
       "✅ Record fetched  successfully:",
       // response.data,
     );
-    console.log("data=>",response.data[0].Team_Leader);
+    console.log("data=>",response.data.data);
     
     // code to send the data back
     const lead = response.data[0]; // shortcut for cleaner code
