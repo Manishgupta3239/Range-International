@@ -158,13 +158,13 @@ const PostLeads = async (req, res) => {
     
     // code to send the data back
     const lead = response.data[0]; // shortcut for cleaner code
-    console.log(response.data[0].Mobile)
+    console.log("mobileeeeeeeeeeeeeee",response.data[0].Mobile)
     const dataMap = {
       owner: `${data.data.owner}`,
       Team_Leader:`${data.data.Team_Leader}`,
       Agent_Phone_No:`${data.data.Agent_Phone_No}`,
       Agent_Name:`${data.data.Agent_Name}`,
-      Mobile: `${lead.Mobile}`,
+      // Mobile: `${lead.Mobile}`,
       Alternate_Mobile_Number: `${lead.Alternate_Mobile_Number}`,
       Full_Name1: `${lead.Full_Name1}`,
       Last_Name: `${lead.Last_Name}`,
