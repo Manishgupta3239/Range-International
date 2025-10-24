@@ -3,33 +3,31 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { postRouter } from "./routes/postRoute.js";
 import generateToken from "./lib/generateToken.js";
+import { setToken } from "./lib/tokenManager.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-let token = "";
 
 // middlewares
 app.use(cors());
 app.use(express.json());
 
-// cron
-
-
-// accessing token immediatly
+// generate and set token immediately
 (async () => {
-  token = await generateToken();
+  const token = await generateToken();
+  setToken(token);
   console.log("Initial Zoho token generated");
 })();
 
-// api
+// api routes
 app.use("/api/post", postRouter);
 
-
 app.get("/api/token", async (req, res) => {
-  token = await generateToken();
+  const token = await generateToken();
   if (token) {
+    setToken(token);
     console.log("🔁 Zoho token refreshed:", token);
     res.status(200).json({ message: "Token created", token });
   } else {
@@ -37,22 +35,71 @@ app.get("/api/token", async (req, res) => {
   }
 });
 
-
-// return updated token
-function updatedToken() {
-  return token;
-}
-
 // server
 try {
   app.listen(PORT, () => {
     console.log(`connected to ${PORT}`);
   });
-} catch (error){
-  console.log("ERROR IN connecting", error.message);
+} catch (error) {
+  console.log("ERROR in connecting", error.message);
 }
 
-export default updatedToken;
+
+// import express from "express";
+// import dotenv from "dotenv";
+// import cors from "cors";
+// import { postRouter } from "./routes/postRoute.js";
+// import generateToken from "./lib/generateToken.js";
+
+// dotenv.config();
+
+// const app = express();
+// const PORT = process.env.PORT || 3001;
+// let token = "";
+
+// // middlewares
+// app.use(cors());
+// app.use(express.json());
+
+// // cron
+
+
+// // accessing token immediatly
+// (async () => {
+//   token = await generateToken();
+//   console.log("Initial Zoho token generated");
+// })();
+
+// // api
+// app.use("/api/post", postRouter);
+
+
+// app.get("/api/token", async (req, res) => {
+//   token = await generateToken();
+//   if (token) {
+//     console.log("🔁 Zoho token refreshed:", token);
+//     res.status(200).json({ message: "Token created", token });
+//   } else {
+//     res.status(400).json({ message: "Token not created" });
+//   }
+// });
+
+
+// // return updated token
+// function updatedToken() {
+//   return token;
+// }
+
+// // server
+// try {
+//   app.listen(PORT, () => {
+//     console.log(`connected to ${PORT}`);
+//   });
+// } catch (error){
+//   console.log("ERROR IN connecting", error.message);
+// }
+
+// export default updatedToken;
 
 
 
