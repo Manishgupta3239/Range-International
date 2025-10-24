@@ -97,6 +97,7 @@ const PostLeadVerification = async (req, res) => {
 
 const PostLeads = async (req, res) => {
   try {
+    console.log("hit hua post leads")
     const data = req.body;
     const token = getToken();
     console.log("lead ID from zoho", data);
