@@ -214,15 +214,11 @@ const PostLeads = async (req, res) => {
     const payload = { data: [dataMap], trigger: ["workflow"] };
     console.log("payload", payload);
     console.log("token in post lead =>", token);
-    const headers1 = {
-      Authorization: `Zoho-oauthtoken ${token}`,
-      "Content-Type": "application/json",
-    };
 
     const response1 = await axios.post(
       "https://www.zohoapis.com/crm/v8/Leads",
       payload,
-      { headers1 }
+      {headers}
     );
     // console.log(response.data);
     console.log(
