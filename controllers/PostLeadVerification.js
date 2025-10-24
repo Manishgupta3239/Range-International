@@ -146,7 +146,7 @@ const PostLeads = async (req, res) => {
         "Content-Type": "application/json",
     };
     const response = await axios.get(
-      `https://www.zohoapis.com/crm/v8/Leads/${data.data.leadId}`,
+      `https://www.zohoapis.com/crm/v8/Leads/${data.data.lead_id}`,
       { headers }
     );
 
@@ -245,7 +245,6 @@ const PostLeads = async (req, res) => {
     res.status(400).json({ error: "Zoho request failed" });
   }
 
-  res.status(200).json(body);
 };
 
 export { PostLeadVerification, PostLeads };
