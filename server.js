@@ -14,6 +14,8 @@ let token = "";
 app.use(cors());
 app.use(express.json());
 
+// cron
+
 
 // accessing token immediatly
 (async () => {
@@ -23,6 +25,7 @@ app.use(express.json());
 
 // api
 app.use("/api/post", postRouter);
+
 
 app.get("/api/token", async (req, res) => {
   token = await generateToken();
