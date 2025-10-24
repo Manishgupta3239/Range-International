@@ -153,7 +153,6 @@ const PostLeads = async (req, res) => {
     console.log(
       "✅ Record fetched  successfully:",
       JSON.stringify(response.data),
-      response
     );
     
     // code to send the data back
