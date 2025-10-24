@@ -154,7 +154,7 @@ const PostLeads = async (req, res) => {
       "✅ Record fetched  successfully:",
       JSON.stringify(response.data),
     );
-    console.log("data=>",response.data);
+    console.log("data=>",response.data[0]);
     // code to send the data back
     const lead = response.data.data; // shortcut for cleaner code
     console.log(response.data.data.Mobile)
