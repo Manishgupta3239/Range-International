@@ -152,12 +152,13 @@ const PostLeads = async (req, res) => {
 
     console.log(
       "✅ Record fetched  successfully:",
-      JSON.stringify(response.data),
+      response.data,
     );
-    console.log("data=>",response.data[0]);
+    console.log("data=>",response.data);
+    
     // code to send the data back
-    const lead = response.data.data; // shortcut for cleaner code
-    console.log(response.data.data.Mobile)
+    const lead = response.data[0]; // shortcut for cleaner code
+    console.log(response.data[0].Mobile)
     const dataMap = {
       owner: `${data.data.owner}`,
       Team_Leader:`${data.data.Team_Leader}`,
