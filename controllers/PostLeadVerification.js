@@ -156,8 +156,8 @@ const PostLeads = async (req, res) => {
     );
     console.log("data=>",response.data);
     // code to send the data back
-    const lead = response.data[0]; // shortcut for cleaner code
-    console.log(response.data[0].Mobile)
+    const lead = response.data; // shortcut for cleaner code
+    console.log(response.data.Mobile)
     const dataMap = {
       owner: `${data.data.owner}`,
       Team_Leader:`${data.data.Team_Leader}`,
