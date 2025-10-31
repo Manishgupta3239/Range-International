@@ -55,6 +55,7 @@ const PostLeadVerification = async (req, res) => {
       Name: safe(data.data.Lead_Verification_Name),
       Sub_Campaign_ID: safe(data.data.Sub_Campaign_ID),
       Campaign_Name: safe(data.data.Campaign_id),
+      Campaign:safe(data.data.Campaign),
       Valid_Till: safe(valid_till),
       Lead_Name: safe(data.data.Lead_Name),
       Email: safe(data.data.Email),
