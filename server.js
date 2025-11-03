@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 3001;
 // Define all your refresh tokens and their variable IDs
 const refreshTokens = [
   {
-    name: "MAIN",
-    refreshToken: process.env.ZOHO_REFRESH_TOKEN,
+    name: "AWS",
+    refreshToken: process.env.ZOHO_AWS_TOKEN,
     variableId: "6862703000008907051",
     value: ""
   },
@@ -30,6 +30,12 @@ const refreshTokens = [
     name: "EVENT",
     refreshToken: process.env.ZOHO_EVENT_TOKEN,
     variableId: "6862703000008907055",
+    value: ""
+  },
+  {
+    name: "EXTRA",
+    refreshToken: process.env.ZOHO_EXTRA_TOKEN,
+    variableId: "6862703000008932104",
     value: ""
   }
 ];
@@ -75,13 +81,14 @@ const refreshZohoTokens = async () => {
   for (const item of refreshTokens) {
     try {
       console.log(`🕐 Refreshing token for ${item.name}...`);
+      console.log("refresh token",item.refreshToken);
       const newAccessToken = await generateToken(item.refreshToken);
       item.value = newAccessToken;
       console.log(`✅ ${item.name} token refreshed`);
 
       // 🔸 Delay 3 seconds between each token refresh
-      await delay(3000);
-      console.log("delay of 3 seconds")
+      await delay(20000);
+      console.log("delay of 20 seconds")
 
     } catch (error) {
       console.error(`⚠️ ${item.name} token refresh failed:`, error.message);
@@ -99,9 +106,10 @@ const refreshZohoTokens = async () => {
 })();
 
 // Schedule every 5 minutes
-cron.schedule("*/5 * * * *", () => {
+cron.schedule("*/10 * * * *", async() => {
   console.log("⏰ Running Zoho token refresh cron job...");
-  refreshZohoTokens();
+  await refreshZohoTokens();
+  setToken(refreshTokens[0].value);
 });
 
 // Express setup
